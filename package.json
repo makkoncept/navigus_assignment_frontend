@@ -1,9 +1,16 @@
 {
   "name": "navigus_assignment_frontend",
   "version": "1.0.0",
+  "scripts": {
+    "build": "webpack --mode production",
+    "watch": "webpack --mode development --watch"
+  },
   "author": "Mayank Nader",
   "license": "MIT",
   "devDependencies": {
-    "express": "^4.17.1"
+    "copy-webpack-plugin": "^6.2.1",
+    "express": "^4.17.1",
+    "webpack": "^5.1.3",
+    "webpack-cli": "^4.1.0"
   }
 }
