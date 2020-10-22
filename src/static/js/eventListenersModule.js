@@ -1,3 +1,4 @@
+import { navigateTo } from ".";
 import { appObject, elements } from "./base";
 
 async function postData(url = "", data = {}) {
@@ -35,9 +36,7 @@ async function handleRegister(event) {
     console.log(response);
 
     if (response.status === 200) {
-      window.location = "/login";
-    } else if (response.status == 409) {
-      alert(`${dropDown.value} with this username already exists`);
+      navigateTo("/login");
       throw new Error("409 Conflict");
     }
   }
@@ -69,7 +68,7 @@ async function handleLogin(event) {
       appObject.setItem("role", role);
       appObject.setItem("isLoggedIn", "true");
 
-      window.location = "/dashboard";
+      navigateTo("/dashboard");
     } else {
       alert(`${receivedData.message}`);
     }
@@ -85,7 +84,7 @@ async function handleLogout(event) {
     if (appObject.getItem("username") && appObject.getItem("password")) {
       // clearing the appObject (reference to localStorage)
       appObject.clear();
-      window.location = "/";
+      navigateTo("/");
     } else {
       alert("invalid action");
     }
@@ -115,7 +114,7 @@ async function handleNewCourse(event) {
     // the api sends HTTP 201(created) on success
     if (response.status === 201) {
       alert("new course made");
-      window.location = "/courses";
+      navigateTo("/courses");
     } else if (response.status == 409) {
       alert(`Course with ${courseCodeInput.value} code already exists`);
       throw new Error("409 Conflict");

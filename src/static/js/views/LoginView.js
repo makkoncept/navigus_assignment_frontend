@@ -1,5 +1,6 @@
 import AbstractView from "./AbstractView";
 import { appObject } from "../base";
+import { navigateTo } from "..";
 
 export default class extends AbstractView {
   constructor(params) {
@@ -9,7 +10,7 @@ export default class extends AbstractView {
 
   async getHtml() {
     if (appObject.getItem("isLoggedIn") === "true") {
-      window.location = "/dashboard";
+      navigateTo("/dashboard");
     }
 
     return `

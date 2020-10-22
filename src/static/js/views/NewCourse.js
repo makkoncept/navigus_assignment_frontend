@@ -1,4 +1,5 @@
 import { appObject } from "../base.js";
+import { navigateTo } from "../index.js";
 import AbstractView from "./AbstractView.js";
 
 export default class extends AbstractView {
@@ -19,7 +20,7 @@ export default class extends AbstractView {
         `;
     } else {
       alert("unauthorized");
-      window.location = "/";
+      navigateTo("/");
     }
   }
 }
