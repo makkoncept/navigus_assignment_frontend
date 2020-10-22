@@ -1,6 +1,7 @@
 import Home from "./views/HomeView.js";
 import Login from "./views/LoginView.js";
 import Register from "./views/RegisterView.js";
+import Dashboard from "./views/DashboardView.js";
 import addListeners from "./eventListenersModule";
 import Students from "./views/StudentsView.js";
 import { elements } from "./base.js";
@@ -16,6 +17,7 @@ const router = async () => {
     { path: "/", view: Home },
     { path: "/login", view: Login },
     { path: "/register", view: Register },
+    { path: "/dashboard", view: Dashboard },
     { path: "/students", view: Students },
   ];
 
