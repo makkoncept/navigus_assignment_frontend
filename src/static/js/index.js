@@ -5,6 +5,7 @@ import Dashboard from "./views/DashboardView.js";
 import addListeners from "./eventListenersModule";
 import Students from "./views/StudentsView.js";
 import Courses from "./views/CoursesView.js";
+import NewCourse from "./views/NewCourse.js";
 import { elements } from "./base.js";
 
 export const navigateTo = (url) => {
@@ -21,6 +22,7 @@ const router = async () => {
     { path: "/dashboard", view: Dashboard },
     { path: "/students", view: Students },
     { path: "/courses", view: Courses },
+    { path: "/newcourse", view: NewCourse },
   ];
 
   // Test each route for potential match.
@@ -37,6 +39,7 @@ const router = async () => {
 
   // If no route matches, then go to /
   if (!match) {
+    // TODO: also show 404 notification
     match = {
       route: routes[0],
       result: [location.pathname],

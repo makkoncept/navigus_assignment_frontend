@@ -94,8 +94,40 @@ async function handleLogout(event) {
   }
 }
 
+async function handleNewCourse(event) {
+  if (event.target.classList.contains("new-course-button")) {
+    const courseCodeInput = document.getElementById("course-code-input");
+    const nameInput = document.getElementById("name-input");
+
+    if (!courseCodeInput.value || !nameInput.value) {
+      alert("Error: Empty Course code or Code name");
+      throw Error("empty course code or code name");
+    }
+
+    const data = {
+      course_code: courseCodeInput.value,
+      name: nameInput.value,
+    };
+
+    const response = await postData("http://localhost:5000/courses/", data);
+    console.log(response);
+
+    // the api sends HTTP 201(created) on success
+    if (response.status === 201) {
+      alert("new course made");
+      window.location = "/courses";
+    } else if (response.status == 409) {
+      alert(`Course with ${courseCodeInput.value} code already exists`);
+      throw new Error("409 Conflict");
+    } else {
+      alert(`Some error occured: ${response.status}`);
+    }
+  }
+}
+
 export default function addListeners() {
   elements.app.addEventListener("click", handleRegister);
   elements.app.addEventListener("click", handleLogin);
   elements.app.addEventListener("click", handleLogout);
+  elements.app.addEventListener("click", handleNewCourse);
 }
