@@ -1,3 +1,5 @@
+import { appObject, elements } from "./base";
+
 async function postData(url = "", data = {}) {
   const response = await fetch(url, {
     method: "POST",
@@ -30,8 +32,7 @@ async function handleRegister(event) {
   }
 }
 
-export default function addListeners() {
-  const app = document.getElementById("app");
 
-  app.addEventListener("click", handleRegister);
+export default function addListeners() {
+  elements.app.addEventListener("click", handleRegister);
 }

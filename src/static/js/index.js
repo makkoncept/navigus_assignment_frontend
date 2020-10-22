@@ -2,6 +2,7 @@ import Login from "./views/LoginView.js";
 import Register from "./views/RegisterView.js";
 import addListeners from "./eventListenersModule";
 import Students from "./views/StudentsView.js";
+import { elements } from "./base.js";
 
 export const navigateTo = (url) => {
   console.log(url, "called");
@@ -39,7 +40,7 @@ const router = async () => {
   const view = new match.route.view(match);
 
   // "mounting" the selected view on DOM
-  document.querySelector("#app").innerHTML = await view.getHtml();
+  elements.app.innerHTML = await view.getHtml();
 };
 
 // making sure that when the user navigates through the browser,
