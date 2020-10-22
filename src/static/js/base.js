@@ -3,11 +3,7 @@ export const elements = {
 };
 
 function createAppObject() {
-  return {
-    username: "",
-    password: "",
-    role: "",
-  };
+  return window.localStorage;
 }
 
 export const appObject = createAppObject();
