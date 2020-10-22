@@ -1,3 +1,4 @@
+import Home from "./views/HomeView.js";
 import Login from "./views/LoginView.js";
 import Register from "./views/RegisterView.js";
 import addListeners from "./eventListenersModule";
@@ -12,6 +13,7 @@ export const navigateTo = (url) => {
 
 const router = async () => {
   const routes = [
+    { path: "/", view: Home },
     { path: "/login", view: Login },
     { path: "/register", view: Register },
     { path: "/students", view: Students },
