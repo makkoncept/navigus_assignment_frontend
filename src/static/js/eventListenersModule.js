@@ -18,15 +18,19 @@ async function handleRegister(event) {
     console.log("inside event listeren");
     const usernameInput = document.getElementById("register-username-input");
     const passwordInput = document.getElementById("register-password-input");
-    if (!usernameInput.value || !passwordInput.value) {
-      alert("Error: Empty username or password");
-      throw Error("empty username or password");
+    const dropDown = document.getElementById("register-dropdown");
+
+    if (!usernameInput.value || !passwordInput.value || !dropDown.value) {
+      alert("Error: Empty username or password or role");
+      throw Error("empty username or password or role");
     }
 
     const data = {
       username: usernameInput.value,
       password: passwordInput.value,
+      role: dropDown.value,
     };
+
     const response = await postData("http://localhost:5000/students/", data);
     console.log(response);
   }
