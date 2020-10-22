@@ -1,3 +1,4 @@
+import { appObject } from "../base.js";
 import AbstractView from "./AbstractView.js";
 
 export default class extends AbstractView {
@@ -7,6 +8,10 @@ export default class extends AbstractView {
   }
 
   async getHtml() {
+    if (appObject.getItem("isLoggedIn") === "true") {
+      window.location = "/dashboard";
+    }
+
     return `
             <div class="register-form"
                 <h1>Register</h1>

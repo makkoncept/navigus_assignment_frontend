@@ -67,6 +67,7 @@ async function handleLogin(event) {
       appObject.setItem("username", username);
       appObject.setItem("password", password);
       appObject.setItem("role", role);
+      appObject.setItem("isLoggedIn", "true");
 
       window.location = "/dashboard";
     } else {
@@ -82,6 +83,7 @@ async function handleLogout(event) {
   console.log(event.target);
   if (event.target.id == "logout-link") {
     if (appObject.getItem("username") && appObject.getItem("password")) {
+      // clearing the appObject (reference to localStorage)
       appObject.clear();
       window.location = "/";
     } else {

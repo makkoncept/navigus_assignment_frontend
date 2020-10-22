@@ -8,8 +8,7 @@ export default class extends AbstractView {
   }
 
   async getHtml() {
-    if (appObject.getItem("username") && appObject.getItem("password")) {
-      console.log("app Object verified");
+    if (appObject.getItem("isLoggedIn") === "true") {
       window.location = "/dashboard";
     }
 
