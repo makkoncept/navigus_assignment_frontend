@@ -16,7 +16,10 @@ async function handleRegister(event) {
     console.log("inside event listeren");
     const usernameInput = document.getElementById("register-username-input");
     const passwordInput = document.getElementById("register-password-input");
-    console.log(usernameInput, passwordInput);
+    if (!usernameInput.value || !passwordInput.value) {
+      alert("Error: Empty username or password");
+      throw Error("empty username or password");
+    }
 
     const data = {
       username: usernameInput.value,
