@@ -1,5 +1,5 @@
 import { navigateTo } from ".";
-import { appObject, elements } from "./base";
+import { appObject, elements, getApiUrl } from "./base";
 import { showNotification } from "./utils";
 
 async function postData(url = "", data = {}) {
@@ -18,22 +18,22 @@ async function handleRegister(event) {
   console.log(event.target);
   if (event.target.classList.contains("register-button")) {
     console.log("inside event listeren");
-    const usernameInput = document.getElementById("register-username-input");
-    const passwordInput = document.getElementById("register-password-input");
-    const dropDown = document.getElementById("register-dropdown");
+    const username = document.getElementById("register-username-input").value;
+    const password = document.getElementById("register-password-input").value;
+    const role = document.getElementById("register-dropdown").value;
 
-    if (!usernameInput.value || !passwordInput.value || !dropDown.value) {
+    if (!username || !password || !role) {
       alert("Error: Empty username or password or role");
       throw Error("empty username or password or role");
     }
 
     const data = {
-      username: usernameInput.value,
-      password: passwordInput.value,
-      role: dropDown.value,
+      username,
+      password,
+      role,
     };
 
-    const response = await postData("http://localhost:5000/students/", data);
+    const response = await postData(role === "student" ? getApiUrl("students") : getApiUrl("teachers"), data);
     console.log(response);
 
     if (response.status === 200) {
@@ -61,7 +61,7 @@ async function handleLogin(event) {
       role: dropDown.value,
     };
 
-    const response = await postData("http://localhost:5000/login/", data);
+    const response = await postData(getApiUrl("login"), data);
     const receivedData = await response.json();
     if (response.status === 200) {
       const { username, password, role } = receivedData.results;
@@ -110,7 +110,7 @@ async function handleNewCourse(event) {
       name: nameInput.value,
     };
 
-    const response = await postData("http://localhost:5000/courses/", data);
+    const response = await postData(getApiUrl("courses"), data);
     console.log(response);
 
     // the api sends HTTP 201(created) on success

@@ -1,3 +1,4 @@
+import { getApiUrl } from "../base.js";
 import AbstractView from "./AbstractView.js";
 
 export default class extends AbstractView {
@@ -7,7 +8,7 @@ export default class extends AbstractView {
   }
 
   async getHtml() {
-    const url = "http://localhost:5000/students/";
+    const url = getApiUrl("students");
     const username = "mayank";
     const password = "nader";
     const response = await fetch(url, {
