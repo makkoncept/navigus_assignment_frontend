@@ -1,0 +1,9 @@
+{
+  "name": "navigus_assignment_frontend",
+  "version": "1.0.0",
+  "author": "Mayank Nader",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "^4.17.1"
+  }
+}
