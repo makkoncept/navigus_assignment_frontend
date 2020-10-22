@@ -4,6 +4,7 @@ import Register from "./views/RegisterView.js";
 import Dashboard from "./views/DashboardView.js";
 import addListeners from "./eventListenersModule";
 import Students from "./views/StudentsView.js";
+import Courses from "./views/CoursesView.js";
 import { elements } from "./base.js";
 
 export const navigateTo = (url) => {
@@ -19,6 +20,7 @@ const router = async () => {
     { path: "/register", view: Register },
     { path: "/dashboard", view: Dashboard },
     { path: "/students", view: Students },
+    { path: "/courses", view: Courses },
   ];
 
   // Test each route for potential match.
