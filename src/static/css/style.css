@@ -15,3 +15,7 @@ body {
   background-color: var(--color-lighter-gray);
   color: var(--color-dark-slate-gray);
 }
+
+.display-none {
+  display: none;
+}

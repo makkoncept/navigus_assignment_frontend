@@ -1,5 +1,6 @@
 import { navigateTo } from ".";
 import { appObject, elements } from "./base";
+import { showNotification } from "./utils";
 
 async function postData(url = "", data = {}) {
   const response = await fetch(url, {
@@ -37,6 +38,7 @@ async function handleRegister(event) {
 
     if (response.status === 200) {
       navigateTo("/login");
+      showNotification("successfully registered");
       throw new Error("409 Conflict");
     }
   }

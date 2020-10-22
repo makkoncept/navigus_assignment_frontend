@@ -1,5 +1,6 @@
 export const elements = {
   app: document.getElementById("app"),
+  notificaton: document.querySelector(".notification"),
 };
 
 function createAppObject() {
