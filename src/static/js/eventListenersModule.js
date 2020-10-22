@@ -33,6 +33,13 @@ async function handleRegister(event) {
 
     const response = await postData("http://localhost:5000/students/", data);
     console.log(response);
+
+    if (response.status === 200) {
+      window.location = "/login";
+    } else if (response.status == 409) {
+      alert(`${dropDown.value} with this username already exists`);
+      throw new Error("409 Conflict");
+    }
   }
 }
 
