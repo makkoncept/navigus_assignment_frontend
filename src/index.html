@@ -9,7 +9,52 @@
   </head>
   <body>
     <div class="notification is-primary display-none"></div>
-    <div id="app"></div>
+    <div class="container" id="app"></div>
+
+    <div class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Add New Question</p>
+        </header>
+        <section class="modal-card-body">
+          <div class="field">
+            <label class="label">Question Text</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Write your question here" id="question-text" />
+            </div>
+          </div>
+
+          <div id="option-wrapper">
+            <div class="field">
+              <label class="label">Option 1 Text</label>
+              <div class="control">
+                <input class="input option-text" type="text" placeholder="Write your option here" />
+              </div>
+              <div class="control">
+                <div class="select">
+                  <select class="option-dropdown">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <button class="button" id="load-more-option-button">Load 1 More Option</button>
+            </div>
+          </div>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" id="new-question-button">Add This Question</button>
+          <button class="button" id="close-modal-button">Cancel</button>
+        </footer>
+      </div>
+    </div>
+
     <script type="module" src="static/bundle.js"></script>
   </body>
 </html>

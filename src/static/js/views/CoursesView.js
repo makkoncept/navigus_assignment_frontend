@@ -29,7 +29,8 @@ export default class extends AbstractView {
       // TODO: finish edit functionality
       if (appObject.getItem("role") === "teacher") {
         anchor.setAttribute("data-course-id", course.id);
-        anchor.text = "Edit Course";
+        anchor.text = "Add Question";
+        anchor.classList.add("open-question-form-modal");
       } else {
         anchor.text = "Take Quiz";
       }

@@ -133,9 +133,126 @@ async function handleNewCourse(event) {
   }
 }
 
+async function handleNewQuestion(event) {
+  if (event.target.id === "new-question-button") {
+    const questionText = document.getElementById("question-text").value;
+    const optionFields = Array.from(elements.modalOptionWrapper.querySelectorAll(".field"));
+
+    if (!questionText) {
+      alert("Error: Missing entries in form");
+      throw Error("Missing entries in form");
+    }
+
+    // required data schema
+    // {
+    //   "text": "question text",
+    //   "options": [
+    //     {
+    //       "text": "option 1"
+    //       "is_true": true,
+    //     },
+    //     {
+    //       "text": "option 2"
+    //       "is_true": false,
+    //     }
+    //   ]
+    // }
+
+    const data = {
+      text: questionText,
+      options: [],
+    };
+
+    // going throught the options and filling the data object
+    optionFields.forEach((option) => {
+      // console.log(option);
+      const optionText = option.querySelector(".option-text").value;
+      const is_true = option.querySelector(".option-dropdown").value === "true";
+
+      // if any of them is empty, notify user
+      if (!optionText || is_true === undefined) {
+        alert("Error: Missing entries in form");
+        throw Error("Missing entries in form");
+      }
+
+      data.options.push({ text: optionText, is_true });
+    });
+
+    // console.log(data)
+    const course_id = elements.modal.getAttribute("data-course-id");
+    // post request to /quiz/<int:course_id> needs to be made to add
+    // question to the particular course
+    const response = await postData(`${getApiUrl("quiz")}${course_id}`, data);
+
+    elements.closeModalButton.click();
+
+    if (response.status === 201) {
+      showNotification("Question Added", 3000);
+      navigateTo("/courses");
+    } else if (response.status == 409) {
+      const data = await response.json();
+      const message = data.message;
+      alert(`${message}`);
+    } else {
+      alert(`Some error occured: ${response.status}`);
+    }
+  }
+}
+
+// returns the html markup for an option
+function getOptionHtml(count) {
+  return `<div class="field">
+      <label class="label">Option ${count} Text</label>
+      <div class="control">
+        <input class="input option-text" type="text" placeholder="Write your option here" />
+      </div>
+      <div class="control">
+        <div class="select">
+          <select class="option-dropdown">
+            <option value="true">True</option>
+            <option value="false">False</option>
+          </select>
+        </div>
+      </div>
+    </div>`;
+}
+
+// for adding more option input fields
+async function handleLoadMoreOption(event) {
+  if (event.target.id === "load-more-option-button") {
+    const optionFields = elements.modalOptionWrapper.querySelectorAll(".field");
+    const count = optionFields.length;
+
+    // TODO: figure out a way to persist data in existing input fields
+    elements.modalOptionWrapper.innerHTML += getOptionHtml(count + 1);
+  }
+}
+
+function handleCloseModal() {
+  // changing to default state before closing
+  elements.modalOptionWrapper.innerHTML = getOptionHtml(1);
+  elements.modal.querySelector("#question-text").value = "";
+
+  // "closing"
+  elements.modal.classList.remove("is-active");
+}
+
+function handleOpenModal(event) {
+  if (event.target.classList.contains("open-question-form-modal")) {
+    elements.modal.classList.add("is-active");
+    // saving course id so that post request can be sent to /quiz/<course_id>
+    elements.modal.setAttribute("data-course-id", event.target.getAttribute("data-course-id"));
+  }
+}
+
 export default function addListeners() {
   elements.app.addEventListener("click", handleRegister);
   elements.app.addEventListener("click", handleLogin);
   elements.app.addEventListener("click", handleLogout);
   elements.app.addEventListener("click", handleNewCourse);
+  elements.app.addEventListener("click", handleOpenModal);
+
+  elements.modal.addEventListener("click", handleLoadMoreOption);
+  elements.modal.addEventListener("click", handleNewQuestion);
+  elements.closeModalButton.addEventListener("click", handleCloseModal);
 }
