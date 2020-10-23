@@ -13,6 +13,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         { from: "./index.html", to: "./index.html" },
+        { from: "../_redirects", to: "./" },
         { from: "./static/css/*", to: "./static/css/", flatten: true },
       ],
     }),
