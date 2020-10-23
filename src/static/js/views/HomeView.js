@@ -9,21 +9,20 @@ export default class extends AbstractView {
 
   async getHtml() {
     console.log(appObject);
+    let dynamic = "";
     if (appObject.getItem("isLoggedIn") === "true") {
-      return `
-        <div>
-            <h1>Home</h1>
-            <a href="/dashboard" data-link>Go back to dashboard</a>
-        </div>
-        `;
+      dynamic = `<a class="button is-primary" href="/dashboard" data-link>Go back to dashboard</a>`;
+    } else {
+      dynamic = `<a class="button is-primary" href="/login" data-link>Login</a>
+            <a class="button is-link is-light" href="/register" data-link>Register</a>`;
     }
 
     return `
         <div>
-            <h1>Home</h1>
-            <a href="/login" data-link>Login</a>
-            <a href="/register" data-link>Register</a>
+            <h1 class="title">Home</h1>
+            <
+            ${dynamic}
         </div>
-        `;
+      `;
   }
 }

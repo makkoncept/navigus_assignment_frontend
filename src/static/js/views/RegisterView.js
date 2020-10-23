@@ -13,18 +13,35 @@ export default class extends AbstractView {
       navigateTo("/dashboard");
     }
 
+    //TODO: make a general form for this and login view
     return `
-            <div class="register-form"
-                <h1>Register</h1>
-                <label for="username"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="username" id="register-username-input">  
-                <label for="password"><b>Username</b></label>
-                <input type="text" placeholder="Enter Password" name="password" id="register-password-input">  
-                <select id="register-dropdown" name="role">
-                  <option value="student">Student</option>
-                  <option value="teacher">Teacher</option>
-                </select>
-                <button class="register-button">Register</button>
+            <h1 class="title">Register</h1>
+            <div class="field">
+              <label class="label" for="username">Username</label>
+              <div class="control">
+                <input class="input" type="text" name="username" placeholder="Enter Username" id="register-username-input">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label" for="password">Password</label>
+              <div class="control">
+                <input class="input" type="text" name="password" placeholder="Enter Password" id="register-password-input">
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <div class="select">
+                  <select id="register-dropdown" name="role">
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button class="button is-primary" id="register-button">Register</button>
+              </div>
             </div>
         `;
   }
