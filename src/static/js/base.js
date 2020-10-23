@@ -7,11 +7,11 @@ export const elements = {
 };
 
 const ApiUrl = {
-  login: "http://localhost:5000/login/",
-  students: "http://localhost:5000/students/",
-  teachers: "http://localhost:5000/teachers/",
-  courses: "http://localhost:5000/courses/",
-  quiz: "http://localhost:5000/quiz/",
+  login: "https://navquiz.herokuapp.com/login/",
+  students: "https://navquiz.herokuapp.com/students/",
+  teachers: "https://navquiz.herokuapp.com/teachers/",
+  courses: "https://navquiz.herokuapp.com/courses/",
+  quiz: "https://navquiz.herokuapp.com/quiz/",
 };
 
 export function getApiUrl(route) {
