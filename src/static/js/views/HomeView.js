@@ -20,7 +20,6 @@ export default class extends AbstractView {
     return `
         <div>
             <h1 class="title">Home</h1>
-            <
             ${dynamic}
         </div>
       `;
