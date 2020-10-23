@@ -33,6 +33,8 @@ export default class extends AbstractView {
         anchor.classList.add("open-question-form-modal");
       } else {
         anchor.text = "Take Quiz";
+        anchor.setAttribute("data-course-id", course.id);
+        anchor.classList.add("open-quiz-form-modal");
       }
 
       p.innerText = course.course_code;

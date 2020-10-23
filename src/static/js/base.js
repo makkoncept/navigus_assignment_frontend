@@ -4,6 +4,12 @@ export const elements = {
   modal: document.querySelector(".modal"),
   modalOptionWrapper: document.getElementById("option-wrapper"),
   closeModalButton: document.getElementById("close-modal-button"),
+
+  quizModal: document.getElementById("quiz-modal"),
+  closeQuizButton: document.getElementById("close-quiz-button"),
+  quizQuestion: document.getElementById("quiz-question"),
+  quizOptionsWrapper: document.getElementById("quiz-options"),
+  submitQuizQuestion: document.getElementById("submit-quiz-question"),
 };
 
 const ApiUrl = {
