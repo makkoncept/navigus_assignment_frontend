@@ -11,12 +11,30 @@ export default class extends AbstractView {
   async getHtml() {
     if (appObject.getItem("isLoggedIn") === "true" && appObject.getItem("role") === "teacher") {
       return `
-        <h1>New Course</h1>
-            <label for="course-code"><b>Course Code</b></label>
-            <input type="text" placeholder="CS101" name="course-code" id="course-code-input">  
-            <label for="name"><b>Course Name</b></label>
-            <input type="text" placeholder="Introduction to Computer Science" name="password" id="name-input">  
-            <button class="new-course-button">Create</button>
+            <h1 class="title">New Course</h1>
+            <div class="field">
+              <label class="label" for="course-code">Course Code</label>
+              <div class="control">
+                <input class="input" type="text" name="course-code" placeholder="CS101" id="course-code-input">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label" for="name">Course Name</label>
+              <div class="control">
+                <input class="input" type="text" name="name" placeholder="Introduction to Computer Science" id="name-input">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label" for="passing-marks">Course Name</label>
+              <div class="control">
+                <input class="input" type="text" name="passing-marks" placeholder="100" id="passing-marks-input">
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button class="button is-primary" id="new-course-button">Create Course</button>
+              </div>
+            </div>
         `;
     } else {
       alert("unauthorized");

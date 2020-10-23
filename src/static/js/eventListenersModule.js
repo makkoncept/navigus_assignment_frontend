@@ -16,7 +16,7 @@ async function postData(url = "", data = {}) {
 async function handleRegister(event) {
   console.log("clicked");
   console.log(event.target);
-  if (event.target.classList.contains("register-button")) {
+  if (event.target.id === "register-button") {
     console.log("inside event listeren");
     const username = document.getElementById("register-username-input").value;
     const password = document.getElementById("register-password-input").value;
@@ -39,6 +39,10 @@ async function handleRegister(event) {
     if (response.status === 200) {
       navigateTo("/login");
       showNotification("successfully registered");
+    } else {
+      const data = await response.json();
+      const message = data.message;
+      alert(`${message}`);
       throw new Error("409 Conflict");
     }
   }
@@ -47,7 +51,7 @@ async function handleRegister(event) {
 async function handleLogin(event) {
   console.log("clicked");
   console.log(event.target);
-  if (event.target.classList.contains("login-button")) {
+  if (event.target.id === "login-button") {
     const usernameInput = document.getElementById("login-username-input");
     const passwordInput = document.getElementById("login-password-input");
     const dropDown = document.getElementById("login-dropdown");
@@ -96,18 +100,20 @@ async function handleLogout(event) {
 }
 
 async function handleNewCourse(event) {
-  if (event.target.classList.contains("new-course-button")) {
-    const courseCodeInput = document.getElementById("course-code-input");
-    const nameInput = document.getElementById("name-input");
+  if (event.target.id === "new-course-button") {
+    const courseCode = document.getElementById("course-code-input").value;
+    const name = document.getElementById("name-input").value;
+    const passingMarks = document.getElementById("passing-marks-input").value;
 
-    if (!courseCodeInput.value || !nameInput.value) {
-      alert("Error: Empty Course code or Code name");
-      throw Error("empty course code or code name");
+    if (!courseCode || !name || !passingMarks) {
+      alert("Error: Missing entries in form");
+      throw Error("Missing entries in form");
     }
 
     const data = {
-      course_code: courseCodeInput.value,
-      name: nameInput.value,
+      course_code: courseCode,
+      passing_marks: passingMarks,
+      name,
     };
 
     const response = await postData(getApiUrl("courses"), data);
@@ -115,11 +121,12 @@ async function handleNewCourse(event) {
 
     // the api sends HTTP 201(created) on success
     if (response.status === 201) {
-      alert("new course made");
+      showNotification("New Course Made", 3000);
       navigateTo("/courses");
     } else if (response.status == 409) {
-      alert(`Course with ${courseCodeInput.value} code already exists`);
-      throw new Error("409 Conflict");
+      const data = await response.json();
+      const message = data.message;
+      alert(`${message}`);
     } else {
       alert(`Some error occured: ${response.status}`);
     }
